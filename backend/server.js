@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const todoRoutes = express.Router();
 const PORT = 8000;
 
+let Todo = require('./todo.model');
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -15,12 +17,6 @@ const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
-
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
-});
-
-app.use('/todos', todoRoutes);
 
 todoRoutes.route('/').get(function(req, res) {
     Todo.find(function(err, todos) {
@@ -68,3 +64,10 @@ todoRoutes.route('/update/:id').post(function(req, res) {
             });
     });
 });
+
+app.use('/todos', todoRoutes);
+
+app.listen(PORT, function() {
+    console.log("Server is running on Port: " + PORT);
+});
+
