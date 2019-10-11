@@ -18,6 +18,7 @@ export default class TodosList extends Component {
         super(props);
             this.state = {todos: []};
     }
+
     componentDidMount(){
         axios.get('http://localhost:8000/todos/')
         .then(response => {
@@ -27,6 +28,21 @@ export default class TodosList extends Component {
             console.log(error);
         })
     }
+
+    componentDidUpdate(prevProps, prevState){
+       
+        if (prevProps.data !== this.props.data){
+
+            axios.get('http://localhost:8000/todos/' )
+            .then(response => {
+                this.setState({ todos: response.data });
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+    }
+
     todoList(){
         return this.state.todos.map(function(currentTodo, i){
             return <Todo todo={currentTodo} key={i} />;

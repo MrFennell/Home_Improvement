@@ -49,7 +49,7 @@ export default class EditTodo extends Component {
     }
     onChangeTodoCompleted(e){
         this.setState({
-            todo_completed: e.target.value
+            todo_completed: !this.state.todo_completed
         })
     }
     onSubmit(e){
