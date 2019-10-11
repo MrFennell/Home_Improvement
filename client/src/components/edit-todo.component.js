@@ -5,6 +5,12 @@ export default class EditTodo extends Component {
     constructor(props) {
         super(props);
 
+        this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
+        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
+        this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
+        this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
             todo_description: '',
             todo_responsible: '',
@@ -13,7 +19,7 @@ export default class EditTodo extends Component {
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:4000/todos/'+this.props.match.params.id)
+        axios.get('http://localhost:8000/todos/'+this.props.match.params.id)
         .then(response => {
             this.setState({
                 todo_description: response.data.todo_description,
@@ -55,7 +61,7 @@ export default class EditTodo extends Component {
             todo_completed: this.state.todo_completed
         };
         console.log(obj);
-        axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
+        axios.post('http://localhost:8000/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/') //redirects router to root 
