@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Todo = props => (
@@ -14,37 +14,21 @@ const Todo = props => (
 )
 
 export default class TodosList extends Component {
-    constructor(props){
-        super(props);
-            this.state = {todos: []};
-    }
+    // constructor(props){
+    //     super(props);
+    //         this.state = {todos: []};
+    // }
+    // componentDidMount(){
+    //     this.setState({todos: this.props.todos})
+    // }
+    // componentDidUpdate(prevProps){
+    //     if (this.props.todos !== prevProps.todos){
+    //         this.setState({todos: this.props.todos})
 
-    componentDidMount(){
-        axios.get('http://localhost:8000/todos/')
-        .then(response => {
-            this.setState({ todos: response.data });
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState){
-       
-        if (prevProps.data !== this.props.data){
-
-            axios.get('http://localhost:8000/todos/' )
-            .then(response => {
-                this.setState({ todos: response.data });
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        }
-    }
-
+    //     }
+    // }
     todoList(){
-        return this.state.todos.map(function(currentTodo, i){
+        return this.props.todos.map(function(currentTodo, i){
             return <Todo todo={currentTodo} key={i} />;
         })
     }
